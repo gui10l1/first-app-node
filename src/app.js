@@ -89,7 +89,7 @@ app.delete("/repositories/:id", validateParams, (request, response) => {
 
 	repositories.splice(repositoryIndex, 1);
 
-	return response.status(200).json(repositories);
+	return response.status(204).json();
 });
 
 app.post("/repositories/:id/like", validateParams, (request, response) => {
