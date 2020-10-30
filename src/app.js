@@ -60,7 +60,7 @@ app.put("/repositories/:id", validateParams, validateBody, (request, response) =
 	const repositoryIndex = repositories.findIndex(repository => id === repository.id);
 
 	if (repositoryIndex < 0) {
-		return response.status(404).json({message: "Not found"});
+		return response.status(400).json({message: "Not found"});
 	}
 
 	const { likes } = actualRepository; 
@@ -75,7 +75,7 @@ app.put("/repositories/:id", validateParams, validateBody, (request, response) =
 
 	repositories[repositoryIndex] = repository;
 
-	return response.status(200).json(repository);
+	return response.json(repository);
 });
 
 app.delete("/repositories/:id", validateParams, (request, response) => {
