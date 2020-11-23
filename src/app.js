@@ -10,16 +10,6 @@ app.use(cors());
 
 const repositories = [];
 
-function validateBody(request, response, next) {
-	const { title, url, techs } = request.body;
-
-	if(!title || !url || !techs) {
-		return response.status(400).json({message: "Bad request"});
-	}
-
-	next();
-}
-
 function validateParams(request, response, next) {
 	const { id } = request.params;
 
@@ -34,7 +24,7 @@ app.get("/repositories", (request, response) => {
   return response.status(200).json(repositories);
 });
 
-app.post("/repositories", validateBody, (request, response) => {
+app.post("/repositories", (request, response) => {
 	const { title, url, techs } = request.body;
 
 	const id = uuid();
@@ -52,7 +42,7 @@ app.post("/repositories", validateBody, (request, response) => {
 	return response.status(201).json(newRepository);
 });
 
-app.put("/repositories/:id", validateParams, validateBody, (request, response) => {
+app.put("/repositories/:id", validateParams, (request, response) => {
 	const { id } = request.params;
 	const { title, url, techs } = request.body;
 
